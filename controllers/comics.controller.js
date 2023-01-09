@@ -1,4 +1,4 @@
-import {Comic} from '../models/comic.models.js'
+import { Comic } from '../models/Comic.js'
 import defaultResponse from '../config/response.js'
 
 let comicControl ={

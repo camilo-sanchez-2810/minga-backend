@@ -1,20 +1,33 @@
-import 'dotenv/config.js'
-import '../../config/database.js'
-import {Chapter} from '../Chapter.js'
-
- let chapters = [
-    {
-        comic_id: "63b5c1db823a8ae629f3802e",
-        title: "jujutsu kaisen",
-        pages: ["https://static.wikia.nocookie.net/jujutsu-kaisen/images/f/f6/JJK_New_Key_Visual.jpg/revision/latest?cb=20200914020414&path-prefix=es","https://static.wikia.nocookie.net/jujutsu-kaisen/images/0/0e/Volume_1.png/revision/latest?cb=20200905220554&path-prefix=es"],
-        order: 3
-        
-    },{
-        comic_id: "63b5c1db823a8ae629f3802f",
-        title: "Dragon Ball",
-        pages: ["https://www.crunchyroll.com/imgsrv/display/thumbnail/480x720/catalog/crunchyroll/35e4ac6339f5fdcc164160a5755790cd.jpe","https://static.wikia.nocookie.net/doblaje/images/4/4a/DragonBall.jpeg/revision/latest?cb=20200915224214&path-prefix=es"],
-        order: 5
-    }
- ]
-
- Chapter.insertMany(chapters)
+"https://storage.googleapis.com/minga/mangas/parasyte/parasyte__001/parasyte__001%20(01).jpg"
+"https://storage.googleapis.com/minga/mangas/ajin/ajin__001/ajin__001%20(01).jpg"
+"https://storage.googleapis.com/minga/mangas/zetman/zetman__001/Zetman__001%20(01).jpg"
+"https://storage.googleapis.com/minga/mangas/death_note/death_note__001/death_dote_001%20(01).jpg"
+"https://storage.googleapis.com/minga/mangas/deadman_wonderland/deadman_wonderland__001/deadman_wonderland_001%20(01).jpg"
+"https://storage.googleapis.com/minga/mangas/slam_dunk/slam_dunk__001/sd_001%20(01).jpg"
+"https://storage.googleapis.com/minga/mangas/secret_wars/secret_wars__001/secret_wars__001%20(01).jpg"
+"https://storage.googleapis.com/minga/mangas/secret_invasion/secret_invasion__001/secret_invasion__001%20(01).jpg"
+"https://storage.googleapis.com/minga/mangas/spiderman_kraven/spiderman_kraven___001/spiderman_kraven___001%20(01).jpg"
+"https://storage.googleapis.com/minga/mangas/tokyo_revengers/tokyo_revengers__001/tokyo_revengers__001%20(01).png"
+"https://storage.googleapis.com/minga/mangas/kimetsu_no_yaiba/kimetsu_no_yaiba__001/kimetsu_no_yaiba__001%20(01).jpg"
+"https://storage.googleapis.com/minga/mangas/jujutsu_kaisen/jujutsu_kaisen__001/jujutsu_kaisen__001%20(01).jpg"
+"https://storage.googleapis.com/minga/mangas/burn_the_witch/burn_the_witch__006/burn_the_witch__006%20(01).jpg"
+"https://storage.googleapis.com/minga/mangas/saint_seiya/saint_seiya__001/saint_seiya__001%20(01).png"
+"https://storage.googleapis.com/minga/mangas/shaman_king/shaman_king__001/shaman_king__001%20(01).png"
+"https://storage.googleapis.com/minga/mangas/towerofgod/towerofgod_001/towerofgod_001%20(1).jpg"
+"https://storage.googleapis.com/minga/mangas/thebreaker/thebreaker_001/thebreaker_001%20(01).jpg"
+"https://storage.googleapis.com/minga/mangas/sololeveling/sololeveling_001/sololeveling_001%20(01).png"
+"https://storage.googleapis.com/minga/mangas/planet_hulk/planet_hulk__001/%20(01).jpg"
+"https://storage.googleapis.com/minga/mangas/world_war_hulk/world_war_hulk__001/%20(01).jpg"
+"https://storage.googleapis.com/minga/mangas/avengers_vs_xmen/avengers_vs_xmen__001/%20(01).jpg"
+"https://storage.googleapis.com/minga/mangas/flashpoint/flashpoint__001/%20(01).jpg"
+"https://storage.googleapis.com/minga/mangas/heroes_in_crisis/heroesincrisis__001/%20(01).jpg"
+"https://storage.googleapis.com/minga/mangas/jlatorredebabel/jlatorredebabel__001/%20(01).jpg"
+"https://storage.googleapis.com/minga/mangas/heroes/heroes__001/%20(01).jpg"
+"https://storage.googleapis.com/minga/mangas/berserk/berserk__001/%20(01).jpg"
+"https://storage.googleapis.com/minga/mangas/tokyo_ghoul/tokyo_ghoul__001/%20(01).jpg"
+"https://storage.googleapis.com/minga/mangas/strobe_edge/strobe_edge__001/%20(01).jpg"
+"https://storage.googleapis.com/minga/mangas/fruits_basquet/fruits_basket__001/%20(01).jpg"
+"https://storage.googleapis.com/minga/mangas/nana/nana__001/%20(01).jpg"
+"https://storage.googleapis.com/minga/mangas/superman_sky/superman_sky__001/%20(01).jpg"
+"https://storage.googleapis.com/minga/mangas/blackes_night/blackes_night__001/%20(01).jpg"
+"https://storage.googleapis.com/minga/mangas/swamp_thing/swamp_thing__001/%20(01).jpg"
