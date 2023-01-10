@@ -11,10 +11,7 @@ const controller = {
 			req.body.data = 'chapter created';
 			return defaultResponse(req, res);
         } catch(error){
-            req.body.success = false;
-			req.body.sc = 500;
-			req.body.data = 'error';
-			return defaultResponse(req, res);
+            next(error)
         }
     },
     get_pages: async (req, res) => {
@@ -33,10 +30,7 @@ const controller = {
                 return defaultResponse(req, res);
             }
         } catch(error) {
-            req.body.success = false;
-			req.body.sc = 500;
-			req.body.data = 'error';
-			return defaultResponse(req, res);
+            next(error)
         }
     }
 }
