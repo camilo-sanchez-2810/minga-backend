@@ -3,15 +3,21 @@ import defaultResponse from "../config/response.js";
 
 
 const controller = {
-    read: async (req, res, next) => {
-        const id = req.path.replace('/', '')
+    get_comic: async (req, res) => {
+        const {id} = req.params;
         
         try {
-            let one = await Comic.findById(id)
+            let one = await Comic.findById(id);
+            const oneComic = {
+                title: one.title,
+                photo: one.photo,
+                description: one.description,
+                category: one.category_id
+            };
             if (one) {
                 req.body.success = true;
                 req.body.sc = 200;
-                req.body.data = one;
+                req.body.data = oneComic;
                 return defaultResponse(req, res);
             } else {
                 req.body.success = false;
@@ -19,8 +25,11 @@ const controller = {
                 req.body.data = "not found";
                 return defaultResponse(req, res);
             }
-        } catch (error) {
-            next(error);
+        }  catch (error) {
+			req.body.success = false;
+			req.body.sc = 500;
+            req.body.data = "error";
+			return defaultResponse(req, res);
         }
     }
     }
