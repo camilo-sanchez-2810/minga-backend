@@ -19,13 +19,14 @@ let newDoc = async(user,model,dataModel) => {
 }
 
 let newCategories = async(categories) => await Category.insertMany(categories)
+newCategories(categories)
 
 let newComic = async(comic,author,company) => {
     let category = await Category.findOne({ name: comic.category_name })
     comic.category_id = category._id
-    comic.author_id = author._id
+    comic.author_id = author
     if (company) {
-        comic.company_id = company._id
+        comic.company_id = company
     }
     let newComic = await Comic.create(comic)
     return newComic._id
@@ -42,7 +43,7 @@ let data = async() => {
     let cia2 = await newDoc(user8,Company,company2)
     let cia3 = await newDoc(user9,Company,company3)
     let cia4 = await newDoc(user10,Company,company4)
-    await newCategories(categories)
+    
     let ncomic1 = await newComic(comic1,aut1,cia3)
     let ncomic2 = await newComic(comic2,aut2,cia3)
     let ncomic3 = await newComic(comic3,aut3,cia3)
