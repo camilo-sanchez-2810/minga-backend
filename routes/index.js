@@ -2,7 +2,7 @@ import chapters from './chapter.js'
 import users from './users.js'
 import authors from './authors.js'
 import comics from './comics.js'
-import categories from './categories'
+import categories from './categories.js'
 import express from 'express'
 let router = express.Router()
 
