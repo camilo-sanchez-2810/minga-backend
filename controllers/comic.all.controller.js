@@ -27,8 +27,6 @@ const controller = {
 		if (req.query.limit) {
 			pagination.limit = req.query.limit;
 		}
-
-
     try {
         let all = await Comic.find(queriesToFilter)
         .sort(ordering)
