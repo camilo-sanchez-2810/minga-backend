@@ -25,7 +25,7 @@ const controller = {
 				title: chapter.title,
 				order: chapter.order,
 				pages: chapter.pages.sort((firstElement, secondElement) =>
-					secondElement.localeCompare(firstElement)
+					firstElement.localeCompare(secondElement)
 				),
 			};
 			if (chapter) {
