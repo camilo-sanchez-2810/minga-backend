@@ -21,17 +21,13 @@ const controller = {
 		const { id } = req.params;
 		try {
 			const chapter = await Chapter.findById(id,"title pages order");
-			const dataResponse = {
-				title: chapter.title,
-				order: chapter.order,
-				pages: chapter.pages.sort((firstElement, secondElement) =>
-					firstElement.localeCompare(secondElement)
-				),
-			};
+			chapter.pages = chapter.pages.sort((firstElement, secondElement) =>
+				firstElement.localeCompare(secondElement)
+			)
 			if (chapter) {
 				req.body.success = true;
 				req.body.sc = 200;
-				req.body.data = dataResponse;
+				req.body.data = chapter;
 				return defaultResponse(req, res);
 			} else {
 				req.body.success = false;
