@@ -7,18 +7,11 @@ const controller = {
         const {id} = req.params;
         
         try {
-            let one = await Comic.findById(id, "-author_id -company_id");
-            const oneComic = {
-                title: one.title,
-                author: one.author_id,
-                photo: one.photo,
-                description: one.description,
-                category: one.category_id
-            };
+            let one = await Comic.findById(id, "-author_id -company_id -__v -createdAt -updatedAt");
             if (one) {
                 req.body.success = true;
                 req.body.sc = 200;
-                req.body.data = oneComic;
+                req.body.data = one;
                 return defaultResponse(req, res);
             } else {
                 req.body.success = false;

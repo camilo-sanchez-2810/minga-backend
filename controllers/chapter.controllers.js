@@ -17,7 +17,7 @@ const controller = {
 			return defaultResponse(req, res);
         }
     },
-    view_caps: async (req, res, next) => {
+    get_chapters: async (req, res, next) => {
 		console.log(req.query);
 		let consultasParaFiltrar = {};
 		let ordenamiento = {};
@@ -29,7 +29,7 @@ const controller = {
 			consultasParaFiltrar = consultasParaFiltrar.comic_id
 		}
 		if (req.query.sort) {
-			ordenamiento = { name: req.query.sort };
+			ordenamiento = { name: req.query.sort };/////
 		}
 		if (req.query.page) {
 			paginacion.page = req.query.page;
