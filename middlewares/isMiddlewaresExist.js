@@ -1,15 +1,34 @@
 import defaultResponse from '../config/response.js'
 import { Reaction } from '../models/reaction.js'
 
+
 async function reactionExists(req,res,next) {
-    let { reaction } = req.body 
-    let exist = await Reaction.findOne({ reaction })
-    if (exist) {
-        req.body.success = false
-        req.body.sc = 400
-        req.body.data = 'reactions exists'
-        return defaultResponse(req,res)
+    let { name,comic_id,user_id } = req.body //name tiene que ser like o dislike
+    // si el usuario quiere dar like , tengo que check que no existe dislike
+    // si existe borrarlo
+    console.log(name)
+    if(name === "like"){
+        let dislike = await Reaction.findOne({
+            name : "dislike",
+            comic_id,
+            user_id,
+        })
+        console.log(dislike)
+        if(dislike){
+            await Reaction.findByIdAndDelete(dislike._id)
+        }
+    }else if(name === "dislike"){
+        let like = await Reaction.findOne({
+            name : "like",
+            comic_id,
+            user_id,
+        })
+        if(like){
+            await Reaction.findByIdAndDelete(like._id)
+        }
     }
+    //si el usuario quiere dar dislike , tengo que check que no existe like
+    //si existe borrarla
     return next()
 }
 
