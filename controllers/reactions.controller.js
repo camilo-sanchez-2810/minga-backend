@@ -22,7 +22,6 @@ let reactionControl ={
         }
     },
     read: async(req,res,next)=>{
-        console.log(req.query)
             let likes = {name : "like"}
             let dislikes = {name: "dislike"}
             let reacted = {}
@@ -31,13 +30,12 @@ let reactionControl ={
                 dislikes.comic_id = req.query.comic_id
             }
             //if(req.query.user_id){
-              //  reactionToFilter.user_id = req.query.user_id  
-                //}
-        
+            //  reactionToFilter.user_id = req.query.user_id  
+            //}
         try{
-            let allLikes = await Reaction.find(likes) //aca busco todos los likes
+            let allLikes = await Reaction.find(likes) 
+            let allDislikes = await Reaction.find(dislikes) 
             allLikes = allLikes.map(like => String (like.user_id))
-            let allDislikes = await Reaction.find(dislikes) //aca busco todos los dislikes
             allDislikes = allDislikes.map(dislike => String(dislike.user_id))
             let reactions = {
                 likes : allLikes.length, 
@@ -46,10 +44,10 @@ let reactionControl ={
             if (allLikes.includes(req.query.user_id)){
                 reacted.likes = true
                 }else{
-                    reacted.likes = false
+                    reacted.like = false
                 }
                 if (allDislikes.includes(req.query.user_id)){
-                    reacted.dislikes = true
+                    reacted.dislike = true
                     }else{
                         reacted.dislikes = false
                     }
