@@ -23,28 +23,40 @@ let reactionControl ={
     },
     read: async(req,res,next)=>{
         console.log(req.query)
-            let reactionToFilter = {}
-
+            let likes = {name : "like"}
+            let dislikes = {name: "dislike"}
+            let reacted = {}
             if (req.query.comic_id){
-                reactionToFilter.comic_id = req.query.comic_id
+                likes.comic_id = req.query.comic_id
+                dislikes.comic_id = req.query.comic_id
             }
-            if(req.query.user_id){
-                reactionToFilter.user_id = req.query.user_id
-            }
+            //if(req.query.user_id){
+              //  reactionToFilter.user_id = req.query.user_id  
+                //}
         
         try{
-            let all = await Reaction.find(reactionToFilter)
-            if (all){
+            let allLikes = await Reaction.find(likes) //aca busco todos los likes
+            allLikes = allLikes.map(like => String (like.user_id))
+            let allDislikes = await Reaction.find(dislikes) //aca busco todos los dislikes
+            allDislikes = allDislikes.map(dislike => String(dislike.user_id))
+            let reactions = {
+                likes : allLikes.length, 
+                dislikes : allDislikes.length
+            }
+            if (allLikes.includes(req.query.user_id)){
+                reacted.likes = true
+                }else{
+                    reacted.likes = false
+                }
+                if (allDislikes.includes(req.query.user_id)){
+                    reacted.dislikes = true
+                    }else{
+                        reacted.dislikes = false
+                    }
                 req.body.success = true
                 req.body.sc = 200
-                req.body.data = all
+                req.body.data = {reactions,reacted}
                 return defaultResponse(req,res)
-            }else{
-                req.body.success = false
-                req.body.sc = 404
-                req.body.data = "not found"
-                return defaultResponse(req,res)
-            }
         } catch(error){
             next (error)
         }
