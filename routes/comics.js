@@ -7,8 +7,13 @@ import getComic from '../controllers/comic.one.controller.js'
 const { get_comic } = getComic
 
 import express from "express"
+import all from "../controllers/comic.all.controller.js"
+
+const { read } = all
 let router = express.Router()
 
+
+router.get('/',read)
 router.post('/',validator(schema), titleExists, create)
 router.get('/:id', get_comic)
 

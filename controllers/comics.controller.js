@@ -1,6 +1,9 @@
 import { Comic } from '../models/Comic.js'
 import defaultResponse from '../config/response.js'
+import { Category } from '../models/Category.js'
 
+
+//.populate("categories")
 let comicControl ={
     create: async(req, res)=> {
         req.body.active = true
@@ -13,7 +16,8 @@ let comicControl ={
         }catch(error){
             next(error)
         }
-    }
+    },
+    
 }
 
 export default comicControl
