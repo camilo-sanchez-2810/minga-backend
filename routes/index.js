@@ -4,6 +4,7 @@ import authors from './authors.js'
 import comics from './comics.js'
 import categories from './categories.js'
 import express from 'express'
+import reactions from './reactions.js'
 let router = express.Router()
 
 /* GET home page. */
@@ -15,6 +16,8 @@ router.use('/auth',users)
 router.use('/comics', comics)
 router.use('/authors', authors)
 router.use('/chapters',chapters)
+router.get('/:reactions')
 router.use('/categories', categories)
+router.use('/reactions', reactions)
 
 export default router
