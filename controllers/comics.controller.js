@@ -12,8 +12,6 @@ let comicControl ={
             req.body.success = true
             req.body.sc = 201
             req.body.data = 'comic created'
-
-            
             return defaultResponse(req,res)
         }catch(error){
             next(error)
