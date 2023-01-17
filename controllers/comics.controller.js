@@ -9,12 +9,6 @@ let comicControl ={
             req.body.success = true
             req.body.sc = 201
             req.body.data = 'comic created'
-
-            // const {author_id, company_id, title, photo, description, category } = req.body
-            // await Comic.create({author_id, company_id, title, photo, description, category})
-            // req.body.success = true
-            // req.body.sc = 201
-            // req.body.data = 'Comic created'
             return defaultResponse(req,res)
         }catch(error){
             next(error)
