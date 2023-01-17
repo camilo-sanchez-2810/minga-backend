@@ -3,7 +3,8 @@ import { Reaction } from '../models/reaction.js'
 
 
 async function reactionExists(req,res,next) {
-    let { name,comic_id,user_id } = req.body //name tiene que ser like o dislike
+    let { id } = req.user
+    let { name,comic_id } = req.body //name tiene que ser like o dislike
     // si el usuario quiere dar like , tengo que check que no existe dislike
     // si existe borrarlo
     console.log(name)
@@ -11,7 +12,7 @@ async function reactionExists(req,res,next) {
         let dislike = await Reaction.findOne({
             name : "dislike",
             comic_id,
-            user_id,
+            user_id:id
         })
         console.log(dislike)
         if(dislike){
@@ -21,7 +22,7 @@ async function reactionExists(req,res,next) {
         let like = await Reaction.findOne({
             name : "like",
             comic_id,
-            user_id,
+            user_id:id
         })
         if(like){
             await Reaction.findByIdAndDelete(like._id)

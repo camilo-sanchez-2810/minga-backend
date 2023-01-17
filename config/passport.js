@@ -17,6 +17,7 @@ passport.use(
                     user = { //este es el objeto user que se "inyecta" al req
                         //aqui es donde protejo los datos del usuario
                         mail: user.mail,
+                        id : user._id,
                         photo: user.photo,
                         is_admin: user.is_admin,
                         is_author: user.is_author,
