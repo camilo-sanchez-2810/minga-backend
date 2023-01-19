@@ -7,7 +7,7 @@ import orderExists from '../middlewares/chapterExist.js'
 let router = express.Router()
 
 router.post('/',validator(schema),orderExists,create)
-router.get('/:id', get_pages)
 router.get('/', get_chapters)
+router.get('/:id', get_pages)
 
 export default router
