@@ -13,7 +13,8 @@ let controller ={
             }
             let reacted = {}
         try{
-            let allLikes = await Reaction.find(query,"comic_id").populate("comic_id",["title","photo","category_id"]) 
+            let allLikes = await Reaction.find(query,"comic_id").populate("comic_id",["title","photo","category_id"])
+            //.populate({path:"comic_id",populate:"category_id"})
                 req.body.success = true
                 req.body.sc = 200
                 req.body.data = allLikes
