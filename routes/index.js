@@ -16,7 +16,6 @@ router.use('/auth',users)
 router.use('/comics', comics)
 router.use('/authors', authors)
 router.use('/chapters',chapters)
-router.get('/:reactions')
 router.use('/categories', categories)
 router.use('/reactions', reactions)
 
