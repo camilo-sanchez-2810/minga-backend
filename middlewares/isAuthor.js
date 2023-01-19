@@ -10,4 +10,4 @@ async function isAuthor(req,res,next) {
     return defaultResponse(req,res)
 }
 
-export default  isAdmin
+export default  isAuthor
