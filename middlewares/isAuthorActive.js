@@ -1,15 +1,13 @@
 import defaultResponse from '../config/response.js'
-import { Author } from '../models/Author.js'
 
 async function isAuthorActive(req, res, next) {
-    const { author_id } = req.params // El id del autor deberia pasarse de otra forma (Proximamente)
+    const { is_author } = req.user // El id del autor deberia pasarse de otra forma (Proximamente)
     // Primero buscamos el autor
     // Verificamos si esta activo
     //   Si esta activo lo dejo pasar al controlador
     //   Si no esta activo no lo dejo crear un comic (NO LO DEJO PASAR AL CONTROLADOR)
     try {
-      const author = await Author.findById(author_id)
-      if (author.active) {
+      if (is_author) {
         next()
       }
       req.body.success = false

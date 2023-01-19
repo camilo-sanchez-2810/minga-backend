@@ -6,7 +6,7 @@ import express from 'express'
 import orderExists from '../middlewares/chapterExist.js'
 let router = express.Router()
 
-router.post('/',validator(schema),orderExists,create)
+router.post('/',passport.authenticate('jwt', { session:false }),validator(schema),orderExists,create)
 router.get('/:id', get_pages)
 router.get('/', get_chapters)
 

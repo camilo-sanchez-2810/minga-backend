@@ -5,7 +5,7 @@ import { Category } from '../models/Category.js'
 
 //.populate("categories")
 let comicControl ={
-    create: async(req, res)=> {
+    create: async(req, res, next)=> {
         req.body.active = true
         try {
             await Comic.create(req.body)
@@ -17,7 +17,6 @@ let comicControl ={
             next(error)
         }
     },
-    
 }
 
 export default comicControl
