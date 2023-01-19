@@ -9,6 +9,9 @@ async function accountExistsSignIn(req,res,next) {
             mail: user.mail,
             photo: user.photo,
             password: user.password,
+            is_admin: user.is_admin,
+            is_author: user.is_author,
+            is_company: user.is_company,
             is_verified: user.is_verified
         }
         return next() //continuo con el middleware o metodo programado en la ruta
