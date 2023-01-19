@@ -7,7 +7,9 @@ const controller = {
         const {id} = req.params;
         
         try {
-            let one = await Comic.findById(id, "-author_id -company_id -__v -createdAt -updatedAt");
+            let one = await Comic.findById(id, " -company_id -__v -createdAt -updatedAt")
+                .populate({path: "author_id", select: "name"})
+                .populate({path: "category_id", select: "name"})
             if (one) {
                 req.body.success = true;
                 req.body.sc = 200;
