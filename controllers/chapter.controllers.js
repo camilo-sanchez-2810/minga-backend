@@ -39,7 +39,7 @@ const controller = {
 		let ordenamiento = {};
 		let paginacion = {
 			page: 1,
-			limit: 100, 
+			limit: 5, 
 		};
 		if (req.query.comic_id) {
 			consultasParaFiltrar.comic_id = req.query.comic_id
