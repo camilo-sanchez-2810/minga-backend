@@ -12,7 +12,20 @@ const controller = {
     } catch(error) {
       next(error)
     }
-  }
-}
+  },
+    update: async (req, res, next) => {
+        const authorInfo = req.body;
+            try{
+                let result = await Author.findOneAndUpdate({id: authorInfo._id}, {$set: authorInfo});
+            return res.status(200).json({
+                success: true,
+                message: result
+            });
+            } catch(error){
+                next(error)
+            }
+        },
+      }
+
 
 export default controller
