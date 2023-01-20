@@ -22,9 +22,9 @@ let comicControl ={
     my_comics: async(req, res, next) => {
         const user_id = req.user.id
         try {
-            const [author] = await Author.find({user_id}, '_id')
+            const author = await Author.findOne({user_id}, '_id')
             const comics = await Comic.find({author_id: author._id})
-            if(comics.length){
+            if(comics){
                 req.body.success = true
                 req.body.sc = 200
                 req.body.data = comics
