@@ -67,5 +67,34 @@ const controller = {
 			next(error);
 		}
 	},
-};
+	update: async (req, res) => {
+			try{
+				const { id } = req.params
+				let chapter = await Chapter.findOneAndUpdate(
+					{_id : id},
+					req.body,
+					{ new: true }
+				)
+				res.status(200).json({
+					success: true,
+					response: "updated",
+					update_chapter : chapter
+				})
+			}catch(error){
+				console.log(error)
+			}
+        },
+	destroy: async(req,res)=>{
+			try{
+				const { id } = req.params
+				await Chapter.findByIdAndDelete(id)
+				res.status(200).json({
+					succes: true,
+					response: "deleted"
+				})
+			}catch(error){
+				console.log(error)
+			}
+		}
+	};
 export default controller;
