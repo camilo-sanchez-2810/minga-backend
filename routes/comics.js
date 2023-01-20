@@ -1,5 +1,5 @@
 import controller from "../controllers/comics.controller.js"
-const { create, my_comics } = controller
+const { create, my_comics, edit, delete_comic } = controller
 import schema from '../schemas/NewComic.js'
 import validator from '../middlewares/validator.js'
 import isAuthorActive from '../middlewares/isAuthorActive.js'
@@ -20,7 +20,8 @@ router.get('/',read)
 router.post('/', passport.authenticate('jwt', { session: false }),validator(schema), isAuthor, isAuthorActive, titleExists, create)
 router.get('/me', passport.authenticate('jwt', { session: false }), my_comics)
 router.get('/:id', get_comic)
-
+router.put('/:id', validator(schema), edit)
+router.delete('/:id', passport.authenticate('jwt', { session: false }), delete_comic)
 
 
 export default router

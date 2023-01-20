@@ -37,6 +37,29 @@ let comicControl ={
         } catch (error) {
             return next(error)
         }
+    },
+    edit: async(req, res, next) => {
+        try {
+            await Comic.findByIdAndUpdate(req.params.id, req.body)
+            req.body.success = true
+            req.body.sc = 200
+            req.body.data = 'comic edited'
+            return defaultResponse(req,res)
+        } catch (error) {
+            next(error)
+        }
+    },
+    delete_comic: async(req, res, next) => {
+        console.log(req.params)
+        try {
+            await Comic.findByIdAndDelete(req.params.id)
+            req.body.success = true
+            req.body.sc = 200
+            req.body.data = 'comic deleted'
+            return defaultResponse(req,res)
+        } catch (error) {
+            next(error)
+        }
     }
 }
 
