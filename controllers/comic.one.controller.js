@@ -15,7 +15,7 @@ const controller_one = {
               response: one
             })
           } else {
-            res.status(400).json({
+            res.status(400).json({ 
               success: false,
               response: 'comic not found'
             })
@@ -24,6 +24,6 @@ const controller_one = {
           next(error)
         }
       }
-    }
+    } 
     
     export default controller_one   
