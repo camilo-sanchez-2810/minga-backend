@@ -20,20 +20,21 @@ const controller = {
 	get_pages: async (req, res, next) => {
 		const { id } = req.params;
 		try {
-			const chapter = await Chapter.findById(id,"title pages order");
+			const chapter = await Chapter.findById(id, "title pages order");
 			chapter.pages = chapter.pages.sort((firstElement, secondElement) =>
 				firstElement.localeCompare(secondElement)
-			)
+			);
 			if (chapter) {
 				req.body.success = true;
 				req.body.sc = 200;
 				req.body.data = chapter;
-        }
-			} catch (error) {
-				next(error)
-				}
-    },
-    get_chapters: async (req, res, next) => {
+				defaultResponse(req, res)
+			}
+		} catch (error) {
+			next(error);
+		}
+	},
+	get_chapters: async (req, res, next) => {
 		let consultasParaFiltrar = {};
 		let ordenamiento = {};
 		let paginacion = {
