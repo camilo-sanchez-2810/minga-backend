@@ -39,7 +39,7 @@ let controller ={
         try{
             console.log(Reaction.find())
             let allLikes = await Reaction.find({user_id:query.user_id,name:query.name},"comic_id").populate("comic_id",["title","photo","category_id"])
-            
+            .populate({path:"comic_id",populate:"category_id"})
             console.log(allLikes)
                 req.body.success = true
                 req.body.sc = 200
