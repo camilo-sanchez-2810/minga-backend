@@ -1,7 +1,7 @@
 import { Reaction } from '../models/reaction.js'
 import defaultResponse from '../config/response.js'
 import {Comic} from '../models/Comic.js'
-
+import { Category } from '../models/Category.js'
 
 let controller ={
     deleteLike: async(req, res, next)=> {
@@ -27,20 +27,27 @@ let controller ={
     
     read_user: async(req,res,next)=>{
       //console.log(req.query)
-            let query = {
+            let query = {                
                 user_id: req.user.id,
-                name: "like",
-                category_id:req.query.category_id
+                name: "like",                
+            }
+            let queryOfPopulate = {
+                // category_id:req.query.category_id,
+                // title:req.query.title
             }
              if (req.query.category_id){
-                 query.category_id = req.query.category_id.split(",")
+                queryOfPopulate.category_id = req.query.category_id.split(",")
+             }
+              if(req.query.title){
+                queryOfPopulate.title = { "$regex": req.query.title, $options: "i" };
              }
 
         try{
-            console.log(Reaction.find())
-            let allLikes = await Reaction.find({user_id:query.user_id,name:query.name},"comic_id").populate("comic_id",["title","photo","category_id"])
-            .populate({path:"comic_id",populate:"category_id"})
-            console.log(allLikes)
+            
+            let allLikes = await Reaction.find({user_id:query.user_id,name:query.name},"-user_id -createdAt -updatedAt -__v" )
+            .populate({path:"comic_id",match: queryOfPopulate, populate: {path: "category_id", select: "name"},select:["title","photo","category_id"]})
+            allLikes = allLikes.filter(like => like.comic_id !== null)
+            //console.log(allLikes)
                 req.body.success = true
                 req.body.sc = 200
                 req.body.data = allLikes
