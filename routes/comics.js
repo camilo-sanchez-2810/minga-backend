@@ -3,8 +3,8 @@ const { create } = controller
 import schema from '../schemas/NewComic.js'
 import validator from '../middlewares/validator.js'
 import titleExists from '../middlewares/titleCompare.js'
-import getComic from '../controllers/comic.one.controller.js'
-const { get_comic } = getComic
+import controller_one from '../controllers/comic.one.controller.js'
+const { get_comic } = controller_one
 
 import express from "express"
 import all from "../controllers/comic.all.controller.js"

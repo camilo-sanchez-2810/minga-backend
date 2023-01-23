@@ -34,18 +34,14 @@ const controller = {
 				}
     },
     get_chapters: async (req, res, next) => {
-		console.log(req.query);
 		let consultasParaFiltrar = {};
 		let ordenamiento = {};
 		let paginacion = {
 			page: 1,
-			limit: 5, 
+			limit: 100, 
 		};
 		if (req.query.comic_id) {
-			consultasParaFiltrar = consultasParaFiltrar.comic_id
-		}
-		if (req.query.sort) {
-			ordenamiento = { name: req.query.sort };/////
+			consultasParaFiltrar.comic_id = req.query.comic_id
 		}
 		if (req.query.page) {
 			paginacion.page = req.query.page;
@@ -53,21 +49,18 @@ const controller = {
 		if (req.query.limit) {
 			paginacion.limit = req.query.limit;
 		}
+		if (req.query.sort) {
+			ordenamiento = { order: req.query.sort };/////
+		}
 		try {
 			let all = await Chapter.find(consultasParaFiltrar, "-pages -__v -createdAt -updatedAt")
 				.sort(ordenamiento)
+				.skip(paginacion.page > 0 ? (paginacion.page - 1) * paginacion.limit : 0)
 				.limit(paginacion.limit);
-			if (all) {
-				req.body.success = true;
-				req.body.sc = 200;
-				req.body.data = all;
-				return defaultResponse(req, res);
-			} else {
-				req.body.success = false;
-				req.body.sc = 404;
-				req.body.data = "chapter not found";
-				return defaultResponse(req, res);
-			}
+			res.status(201).json({
+				success:true,
+				response:all,
+			});
 		
 		} catch (error) {
 			next(error);
