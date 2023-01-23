@@ -2,6 +2,8 @@ import defaultResponse from "../config/response.js"
 
 async function isAuthor(req,res,next) {
     if (req.user.is_author) {
+        const author = await Author.findOne({user_id: req.user.id})
+        req.body.author_id = author._id
         return next()
     }
     req.body.success = false

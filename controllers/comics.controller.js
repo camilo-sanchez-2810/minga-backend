@@ -8,8 +8,6 @@ import { Author } from '../models/Author.js'
 let comicControl ={
     create: async(req, res, next)=> {
         try {
-            const author = await Author.findOne({user_id: req.user.id})
-            req.body.author_id = author._id
             await Comic.create(req.body)
             req.body.success = true
             req.body.sc = 201
