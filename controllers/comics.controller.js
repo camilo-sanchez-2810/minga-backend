@@ -8,7 +8,7 @@ import { Author } from '../models/Author.js'
 let comicControl ={
     create: async(req, res, next)=> {
         try {
-            const [author] = await Author.find({user_id: req.user.id})
+            const author = await Author.findOne({user_id: req.user.id})
             req.body.author_id = author._id
             await Comic.create(req.body)
             req.body.success = true
@@ -20,10 +20,15 @@ let comicControl ={
         }
     },
     my_comics: async(req, res, next) => {
-        const user_id = req.user.id
+        let query = {}
+        if(req.body.author_id) {
+            query["author_id"] = req.body.author_id
+        }
+        if(req.body.company_id) {
+            query["company_id"] = req.body.company_id
+        }
         try {
-            const author = await Author.findOne({user_id}, '_id')
-            const comics = await Comic.find({author_id: author._id})
+            const comics = await Comic.find(query)
             if(comics){
                 req.body.success = true
                 req.body.sc = 200
@@ -38,7 +43,7 @@ let comicControl ={
             return next(error)
         }
     },
-    edit: async(req, res, next) => {
+    update: async(req, res, next) => {
         try {
             await Comic.findByIdAndUpdate(req.params.id, req.body)
             req.body.success = true
