@@ -23,22 +23,23 @@ let controller ={
         }catch(error){
             next(error)
         }
-    },
+    }, 
     
     read_user: async(req,res,next)=>{
-      console.log(req.query)
+      //console.log(req.query)
             let query = {
                 user_id: req.user.id,
                 name: "like",
-                
+                category_id:req.query.category_id
             }
-            // if (req.query.category_id){
-            //     query.category_id = req.query.category_id.split(",")
-            // }
+             if (req.query.category_id){
+                 query.category_id = req.query.category_id.split(",")
+             }
 
         try{
-            let allLikes = await Reaction.find(query,"comic_id").populate("comic_id",["title","photo","category_id"])
-            .populate({path:"comic_id",populate:"category_id"})
+            console.log(Reaction.find())
+            let allLikes = await Reaction.find({user_id:query.user_id,name:query.name},"comic_id").populate("comic_id",["title","photo","category_id"])
+            
             console.log(allLikes)
                 req.body.success = true
                 req.body.sc = 200
