@@ -1,5 +1,5 @@
 import controller from '../controllers/chapter.controllers.js'
-import { schema, updateChapter,deleteChapter } from '../schemas/chapter.schema.js'
+import { schema, updateChapter } from '../schemas/chapter.schema.js'
 import validator from '../middlewares/validator.js'
 import passport from '../config/passport.js'
 const { create, get_pages, get_chapters, update,destroy } = controller
@@ -16,6 +16,6 @@ router.post('/',passport.authenticate('jwt', { session:false }),validator(schema
 router.get('/:id', get_pages)
 router.get('/', get_chapters)
 router.put('/:id',passport.authenticate('jwt', { session:false }),isAuthor,validator(updateChapter),isComicAuthor,update)
-router.delete('/:id',passport.authenticate('jwt', { session:false }),isAuthor,validator(deleteChapter),isComicAuthor,destroy)
+router.delete('/:id',passport.authenticate('jwt', { session:false }),isAuthor,isComicAuthor,destroy)
 
 export default router

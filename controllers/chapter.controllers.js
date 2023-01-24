@@ -81,7 +81,7 @@ const controller = {
 					update_chapter : chapter
 				})
 			}catch(error){
-				console.log(error)
+				next (error)
 			}
         },
 	destroy: async(req,res)=>{
@@ -93,7 +93,7 @@ const controller = {
 					response: "deleted"
 				})
 			}catch(error){
-				console.log(error)
+				next (error)
 			}
 		}
 	};
