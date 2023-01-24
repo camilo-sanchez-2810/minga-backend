@@ -26,7 +26,7 @@ let comicControl ={
             query["company_id"] = req.body.company_id
         }
         try {
-            const comics = await Comic.find(query)
+            const comics = await Comic.find(query).populate("category_id")
             if(comics){
                 req.body.success = true
                 req.body.sc = 200
