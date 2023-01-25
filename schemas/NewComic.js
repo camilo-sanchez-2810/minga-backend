@@ -5,7 +5,7 @@ const schema = Joi.object({
     title: Joi.string().min(10).required(),
     photo: Joi.string().uri().min(1).required(),
     description: Joi.string().min(20).required(),
-    category: Joi.objectId().required()
+    category_id: Joi.objectId().required()
 })
 
 export default schema
