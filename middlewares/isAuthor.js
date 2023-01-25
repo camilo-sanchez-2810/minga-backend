@@ -8,7 +8,7 @@ async function isAuthor(req,res,next) {
     }
     req.body.success = false
     req.body.sc = 401
-    req.body.data = 'you are not allowed'
+    req.body.data = 'you are not Author'
     return defaultResponse(req,res)
 }
 
