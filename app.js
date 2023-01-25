@@ -9,8 +9,11 @@ import { __dirname } from './utils.js'
 import { notFoundHandler } from './middlewares/notFoundHandler.js'
 import { errorHandler } from './middlewares/errorHandler.js'
 import indexRouter from'./routes/index.js'
+import mercadopago from 'mercadopago';
 
 const app = express();
+
+mercadopago.configure({access_token: process.env.MERCADOPAGO_KEY})
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
