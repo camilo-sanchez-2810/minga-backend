@@ -27,8 +27,7 @@ const schema = Joi.object({
     'any.required': 'Photo is require',
     'string.empty': 'Photo can not be empty',
     'string.uri': 'Photo need to be an url',
-    }),
-  user_id: Joi.objectId().required(),
+    })
 })
 
 export default schema
