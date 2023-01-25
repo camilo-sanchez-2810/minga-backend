@@ -29,6 +29,7 @@ const schema = Joi.object({
     'string.uri': 'Photo need to be an url',
     }),
   user_id: Joi.objectId().required(),
+  active: Joi.boolean().required()
 })
 
 export default schema
