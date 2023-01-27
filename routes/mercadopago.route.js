@@ -2,11 +2,11 @@ import express from "express";
 const router = express.Router();
 import passport from "passport";
 //import PaymentController from "../controllers/mercadoPago.controller.js";
-import Preferences from "../models/mercadopado.model.js";
+import crearOrden from "../controllers/mercadoPago.controller.js";
 import validator from "../middlewares/validator.js";
 
-const { create } = Preferences;
 
-router.post("/", create);
+
+router.post("/", crearOrden);
 
 export default router;
