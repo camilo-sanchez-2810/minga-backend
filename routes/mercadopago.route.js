@@ -7,6 +7,6 @@ import validator from "../middlewares/validator.js";
 
 
 
-router.post("/", crearOrden);
+router.post("/",passport.authenticate('jwt', {session: false}), crearOrden);
 
 export default router;
