@@ -1,4 +1,6 @@
 import { User } from '../models/User.js'
+import { Author } from '../models/Author.js'
+import { Company } from '../models/Company.js'
 import bcryptjs from 'bcryptjs' //modulo para hashear la contraseña
 import crypto from 'crypto' //modulo para generar codigos aleatorios
 import jwt from 'jsonwebtoken' //modulo para utilizar los metodos de jwt
@@ -113,8 +115,44 @@ const controller = {
         } catch(error) {
             next(error)
         }        
-    }
-
+    },
+    updateRoleCompany: async (req, res) => {
+        try {
+          const user = await User.findOneAndUpdate(
+            { _id: req.params.id },
+            { $set: { is_company: true } }
+          );
+          const company = await Company.findOneAndUpdate(
+            { user: req.params.id },
+            { $set: { active: true } }
+          );
+          res
+            .status(200)
+            .json({ message: "User role successfully updated to company" });
+        } catch (err) {
+          res.status(404).json({ error: err.message });
+          next(err);
+        }
+    },
+    updateRoleAuthor: async (req, res) => {
+        try {
+          const user = await User.findOneAndUpdate(
+            { _id: req.params.id },
+            { $set: { is_author: true } }
+          );
+          const author = await Author.findOneAndUpdate(
+            { user: req.params.id },
+            { $set: { active: true } }
+          );
+          res
+            .status(200).json({ 
+                succes: true,
+                message: "User role successfully updated to author" });
+        } catch (err) {
+          res.status(404).json({ error: err.message });
+            next(err);
+        }
+      }
 }
 
 export default controller
