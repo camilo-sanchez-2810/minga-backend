@@ -66,7 +66,7 @@ let comicControl ={
     },
     carousel: async(req, res, next) => {
         try {
-            const lastComics = await Comic.find().sort({$natural: -1}).limit(5)
+            const lastComics = await Comic.find().sort({$natural: -1}).limit(5).select('_id title photo description')
             req.body.success = true
             req.body.sc = 200
             req.body.data = lastComics
