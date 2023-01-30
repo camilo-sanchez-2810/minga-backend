@@ -22,7 +22,7 @@ const controller = {
             to: req.body.mail,
             subject: "User Validation",
             text: "Validate your user pressing in the next link",
-            html: `<p>Press in the next link to validate your user <a href="${frontPath}/verify/${req.body.verify_code}"></a></p>`
+            html: `<p>Press in the next link to validate your user <a href="${frontPath}/verify/${req.body.verify_code}">Press Here</a></p>`
         } // Mensaje a enviar
         try {
             //await accountVerificationEmail(req,res) //envío mail de verificación (SPRINT-4)
