@@ -131,7 +131,6 @@ const controller = {
     },
 
     verify: async(req, res, next) => {
-        console.log(req.params)
         const { verify_code } = req.params
         try {
             await User.findOneAndUpdate({ verify_code }, { is_verified: true })

@@ -63,6 +63,17 @@ let comicControl ={
         } catch (error) {
             next(error)
         }
+    },
+    carousel: async(req, res, next) => {
+        try {
+            const lastComics = await Comic.find().sort({$natural: -1}).limit(5)
+            req.body.success = true
+            req.body.sc = 200
+            req.body.data = lastComics
+            return defaultResponse(req,res)
+        } catch (error) {
+            next(error)
+        }
     }
 }
 
