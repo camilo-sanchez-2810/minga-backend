@@ -1,8 +1,11 @@
 import { User } from '../models/User.js'
+import 'dotenv/config.js'
 import bcryptjs from 'bcryptjs' //modulo para hashear la contraseña
 import crypto from 'crypto' //modulo para generar codigos aleatorios
 import jwt from 'jsonwebtoken' //modulo para utilizar los metodos de jwt
 import defaultResponse from '../config/response.js'
+import SgMail from '@sendgrid/mail' // modulo para usar sendgrid
+SgMail.setApiKey(process.env.API_KEY_SENDGRID)
 
 const controller = {
 
@@ -11,15 +14,27 @@ const controller = {
         req.body.is_admin = false
         req.body.is_author = false
         req.body.is_company = false
-        req.body.is_verified = true //por ahora en true
+        req.body.is_verified = false //por ahora en true
         req.body.verify_code = crypto.randomBytes(10).toString('hex') //defino el codigo de verificacion por mail
         req.body.password = bcryptjs.hashSync(req.body.password, 10) //encripto o hasheo la contraseña
+        const { mail } = req.body
+        console.log(mail);
+        const message = {
+            to: mail,
+            from: 'camsanbar.dev@gmail.com',
+            subject: 'Account validation',
+            text: 'verify your mail using this...',
+            html: '<p>Hola mama!</p>'
+        } // Crea el mensaje que se envia al correo electronico
+        console.log(message)
         try {
             //await accountVerificationEmail(req,res) //envío mail de verificación (SPRINT-4)
             await User.create(req.body) //crea el usuario
             req.body.success = true
             req.body.sc = 201 //agrego el codigo de estado
             req.body.data = 'user created' //agrego el mensaje o información que necesito enviarle al cliente
+            const response = await SgMail.send(message) // envia el mensaje de validacion al correo
+            console.log(response);
             return defaultResponse(req,res) //retorno la respuesta default
         } catch (error) {
             next(error) //respuesta del manejador de errores
