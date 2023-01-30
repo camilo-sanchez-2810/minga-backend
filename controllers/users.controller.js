@@ -18,7 +18,7 @@ const controller = {
         req.body.verify_code = crypto.randomBytes(10).toString('hex') //defino el codigo de verificacion por mail
         req.body.password = bcryptjs.hashSync(req.body.password, 10) //encripto o hasheo la contraseña
         const { mail } = req.body
-        console.log(mail);
+        // TODO: Enviar un link de verificacion cuando sendgrid apruebe la cuenta
         const message = {
             to: mail,
             from: 'camsanbar.dev@gmail.com',
