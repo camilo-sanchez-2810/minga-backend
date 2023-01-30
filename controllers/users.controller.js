@@ -5,6 +5,7 @@ import crypto from 'crypto' //modulo para generar codigos aleatorios
 import jwt from 'jsonwebtoken' //modulo para utilizar los metodos de jwt
 import defaultResponse from '../config/response.js'
 import transporter from '../config/mailConfig.js'
+const frontPath = 'http://localhost:3000'
 
 const controller = {
 
@@ -20,8 +21,8 @@ const controller = {
             from: `"Minga Comics" ${process.env.EMAIL_MAILING}`,
             to: req.body.mail,
             subject: "User Validation",
-            text: "Validate your user using this...",
-            html: "<h2>HOLAAAA</h2>"
+            text: "Validate your user pressing in the next link",
+            html: `<p>Press in the next link to validate your user <a href="${frontPath}/verify/${req.body.verify_code}"></a></p>`
         } // Mensaje a enviar
         try {
             //await accountVerificationEmail(req,res) //envío mail de verificación (SPRINT-4)
