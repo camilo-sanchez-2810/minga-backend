@@ -15,7 +15,7 @@ import isAuthor from '../middlewares/isAuthor.js'
 router.post('/',passport.authenticate('jwt', { session:false }),validator(schema),orderExists,create)
 router.get('/:id', get_pages)
 router.get('/', get_chapters)
-router.put('/:id',passport.authenticate('jwt', { session:false }),isAuthor,validator(updateChapter),isComicAuthor,update)
+router.put('/:id',passport.authenticate('jwt', { session:false }),validator(updateChapter),isAuthor,isComicAuthor,update)
 router.delete('/:id',passport.authenticate('jwt', { session:false }),isAuthor,isComicAuthor,destroy)
 
 export default router

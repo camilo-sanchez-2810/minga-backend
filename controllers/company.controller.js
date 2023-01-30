@@ -1,4 +1,5 @@
 import { Company } from "../models/Company.js"
+import defaultResponse from "../config/response.js"
 
 const controller = {
     update: async (req,res,next) => {
@@ -12,6 +13,17 @@ const controller = {
         })
         }
         catch(error){
+            next(error)
+        }
+    },
+    create: async(req, res, next)=> {
+        try {
+            await Company.create(req.body)
+            req.body.success = true
+            req.body.sc = 201
+            req.body.data = 'company created'
+            return defaultResponse(req,res)
+        }catch(error){
             next(error)
         }
     },
