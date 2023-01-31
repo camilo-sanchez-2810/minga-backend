@@ -7,7 +7,7 @@ const schema = new mongoose.Schema(
 		website: { type: String, required: true },
 		description: { type: String, required: true },
 		user_id: {type: mongoose.Types.ObjectId, ref: 'users'},
-		active: {type: Boolean, require: false}
+		active: {type: Boolean, required: false}
 	},
 	{
 		timestamps: true,

@@ -21,7 +21,7 @@ const controller = {
             await Company.create(req.body)
             req.body.success = true
             req.body.sc = 201
-            req.body.data = 'company created'
+            req.body.data = 'Company Created'
             return defaultResponse(req,res)
         }catch(error){
             next(error)
