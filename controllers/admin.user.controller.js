@@ -39,8 +39,7 @@ const AdminUserController = {
   getCompanies: async (req, res, next) => {
     try {
       const active = req.query.active === "true";
-      const {companies} = await Company.find({ active });
-      console.log(companies)
+      const companies = await Company.find({ active });
       return res.status(200).json({
         success: true,
         response: companies,
