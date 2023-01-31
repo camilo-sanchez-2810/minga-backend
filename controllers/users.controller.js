@@ -1,4 +1,6 @@
 import { User } from '../models/User.js'
+import { Author } from '../models/Author.js'
+import { Company } from '../models/Company.js'
 import bcryptjs from 'bcryptjs' //modulo para hashear la contraseña
 import crypto from 'crypto' //modulo para generar codigos aleatorios
 import jwt from 'jsonwebtoken' //modulo para utilizar los metodos de jwt
@@ -113,8 +115,8 @@ const controller = {
         } catch(error) {
             next(error)
         }        
-    }
-
+    },
+    
 }
 
 export default controller

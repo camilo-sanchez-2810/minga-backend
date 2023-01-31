@@ -3,9 +3,10 @@ import users from './users.js'
 import authors from './authors.js'
 import comics from './comics.js'
 import categories from './categories.js'
-import express from 'express'
+import express, {Router} from 'express'
 import reactions from './reactions.js'
 import companies from './companies.js'
+import admin from './admin.js'
 let router = express.Router()
 
 /* GET home page. */
@@ -20,5 +21,6 @@ router.use('/chapters',chapters)
 router.use('/categories', categories)
 router.use('/reactions', reactions)
 router.use('/companies', companies)
+router.use('/auth/role', admin)
 
 export default router
