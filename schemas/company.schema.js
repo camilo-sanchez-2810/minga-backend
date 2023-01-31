@@ -16,8 +16,7 @@ export const Schema = Joi.object({
         "string.min": "Description must have a minimum length of {#limit}",
         "string.base": "Description must be a type of 'text'",
     }),
-    user_id: Joi.string(),
-    active: Joi.boolean()
+    user_id: Joi.string()
 })
 
 export default Schema

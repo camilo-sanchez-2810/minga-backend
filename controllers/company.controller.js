@@ -18,7 +18,7 @@ const controller = {
     get_company: async (req, res, next) => {
         try {
             const { id } = req.params
-            let companies = await Company.findById(id, "-_id -user_id -createdAt -updatedAt -active -__v")
+            let companies = await Company.findById(id, "-_id -user_id -createdAt -updatedAt")
             if(companies){
                 res.status(200).json({
                     success: true,

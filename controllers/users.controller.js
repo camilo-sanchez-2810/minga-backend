@@ -116,43 +116,7 @@ const controller = {
             next(error)
         }        
     },
-    updateRoleCompany: async (req, res) => {
-        try {
-          const user = await User.findOneAndUpdate(
-            { _id: req.params.id },
-            { $set: { is_company: true } }
-          );
-          const company = await Company.findOneAndUpdate(
-            { user: req.params.id },
-            { $set: { active: true } }
-          );
-          res
-            .status(200)
-            .json({ message: "User role successfully updated to company" });
-        } catch (err) {
-          res.status(404).json({ error: err.message });
-          next(err);
-        }
-    },
-    updateRoleAuthor: async (req, res) => {
-        try {
-          const user = await User.findOneAndUpdate(
-            { _id: req.params.id },
-            { $set: { is_author: true } }
-          );
-          const author = await Author.findOneAndUpdate(
-            { user: req.params.id },
-            { $set: { active: true } }
-          );
-          res
-            .status(200).json({ 
-                succes: true,
-                message: "User role successfully updated to author" });
-        } catch (err) {
-          res.status(404).json({ error: err.message });
-            next(err);
-        }
-      }
+    
 }
 
 export default controller
