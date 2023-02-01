@@ -1,5 +1,5 @@
 import controller from "../controllers/comics.controller.js"
-const { create, my_comics, update, delete_comic } = controller
+const { create, my_comics, update, delete_comic, carousel } = controller
 import schema from '../schemas/NewComic.js'
 import validator from '../middlewares/validator.js'
 import isAuthorActive from '../middlewares/isAuthorActive.js'
@@ -19,6 +19,7 @@ let router = express.Router()
 
 
 router.get('/',read)
+router.get('/carousel', carousel)
 router.post('/', passport.authenticate('jwt', { session: false }),validator(schema), isAuthor, isAuthorActive, titleExists, create)
 router.get('/me', passport.authenticate('jwt', { session: false }), isAuthorOrCompany, my_comics)
 router.get('/:id', get_comic)
