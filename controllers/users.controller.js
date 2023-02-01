@@ -1,8 +1,11 @@
 import { User } from '../models/User.js'
+import 'dotenv/config.js'
 import bcryptjs from 'bcryptjs' //modulo para hashear la contraseña
 import crypto from 'crypto' //modulo para generar codigos aleatorios
 import jwt from 'jsonwebtoken' //modulo para utilizar los metodos de jwt
 import defaultResponse from '../config/response.js'
+import transporter from '../config/mailConfig.js'
+const frontPath = 'http://localhost:3000'
 
 const controller = {
 
@@ -11,15 +14,23 @@ const controller = {
         req.body.is_admin = false
         req.body.is_author = false
         req.body.is_company = false
-        req.body.is_verified = true //por ahora en true
+        req.body.is_verified = false //por ahora en true
         req.body.verify_code = crypto.randomBytes(10).toString('hex') //defino el codigo de verificacion por mail
         req.body.password = bcryptjs.hashSync(req.body.password, 10) //encripto o hasheo la contraseña
+        const message = {
+            from: `"Minga Comics" ${process.env.EMAIL_MAILING}`,
+            to: req.body.mail,
+            subject: "User Validation",
+            text: "Validate your user pressing in the next link",
+            html: `<p>Press in the next link to validate your user <a href="${frontPath}/verify/${req.body.verify_code}">Press Here</a></p>`
+        } // Mensaje a enviar
         try {
             //await accountVerificationEmail(req,res) //envío mail de verificación (SPRINT-4)
             await User.create(req.body) //crea el usuario
             req.body.success = true
             req.body.sc = 201 //agrego el codigo de estado
             req.body.data = 'user created' //agrego el mensaje o información que necesito enviarle al cliente
+            await transporter.sendMail(message) // Envio del mail
             return defaultResponse(req,res) //retorno la respuesta default
         } catch (error) {
             next(error) //respuesta del manejador de errores
@@ -113,6 +124,19 @@ const controller = {
         } catch(error) {
             next(error)
         }        
+    },
+
+    verify: async(req, res, next) => {
+        const { verify_code } = req.params
+        try {
+            await User.findOneAndUpdate({ verify_code }, { is_verified: true })
+            req.body.success = true
+            req.body.sc = 201 
+            req.body.data = 'user verified'
+            return defaultResponse(req,res)
+        } catch (error) {
+            next(error)
+        }
     }
 
 }
