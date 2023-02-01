@@ -1,4 +1,5 @@
 import defaultResponse from "../config/response.js"
+import { Author }from "../models/Author.js"
 
 async function isAuthor(req,res,next) {
     if (req.user.is_author) {
