@@ -1,5 +1,5 @@
 import defaultResponse from '../config/response.js'
-import { Reaction } from '../models/reaction.js'
+import { Reaction } from '../models/Reaction.js'
 
 
 async function reactionExists(req,res,next) {
