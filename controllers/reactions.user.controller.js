@@ -1,4 +1,4 @@
-import { Reaction } from '../models/reaction.js'
+import { Reaction } from '../models/Reaction.js'
 import defaultResponse from '../config/response.js'
 import {Comic} from '../models/Comic.js'
 import { Category } from '../models/Category.js'
